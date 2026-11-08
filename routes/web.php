@@ -1,13 +1,12 @@
 <?php
 
+use App\Jobs\LogInfoJob;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
 
 
-    sleep(3);
-
-    Log::info("This is the web route");
+    LogInfoJob::dispatch();
 
     return view('welcome');
 });
