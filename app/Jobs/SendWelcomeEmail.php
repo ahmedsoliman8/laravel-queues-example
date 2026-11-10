@@ -4,11 +4,14 @@ namespace App\Jobs;
 
 use App\Models\User;
 use Illuminate\Contracts\Queue\ShouldBeEncrypted;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Queue\Attributes\WithoutRelations;
 use Illuminate\Support\Facades\Mail;
 
-class SendWelcomeEmail implements ShouldQueue, ShouldBeEncrypted
+#[WithoutRelations]
+class SendWelcomeEmail implements ShouldQueue,ShouldBeUnique
 {
     use Queueable;
 
@@ -18,6 +21,13 @@ class SendWelcomeEmail implements ShouldQueue, ShouldBeEncrypted
     public function __construct(public User $user)
     {
         //
+    }
+
+    //public int $uniqueFor = 20;
+
+    public function uniqueId(): string
+    {
+        return $this->user->id;
     }
 
     /**

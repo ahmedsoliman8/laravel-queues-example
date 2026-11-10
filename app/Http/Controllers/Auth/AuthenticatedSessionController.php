@@ -29,8 +29,9 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-       // dd($request->user());
-        SendWelcomeEmail::dispatch($request->user());
+        $user = $request->user()->load('posts');
+
+        SendWelcomeEmail::dispatch($user);
 
         return redirect()->intended(route('dashboard', absolute: false));
     }
