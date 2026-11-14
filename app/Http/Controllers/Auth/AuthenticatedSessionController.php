@@ -31,7 +31,7 @@ class AuthenticatedSessionController extends Controller
 
         $user = $request->user()->load('posts');
 
-        SendWelcomeEmail::dispatch($user);
+        SendWelcomeEmail::dispatch( $user);
 
         return redirect()->intended(route('dashboard', absolute: false));
     }

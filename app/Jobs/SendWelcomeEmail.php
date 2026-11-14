@@ -11,16 +11,18 @@ use Illuminate\Queue\Attributes\WithoutRelations;
 use Illuminate\Support\Facades\Mail;
 
 #[WithoutRelations]
-class SendWelcomeEmail implements ShouldQueue,ShouldBeUnique
+class SendWelcomeEmail implements ShouldQueue, ShouldBeUnique
 {
     use Queueable;
+
 
     /**
      * Create a new job instance.
      */
     public function __construct(public User $user)
     {
-        //
+        //  $this->delay=30;
+        //$this->queue = 'mailing';
     }
 
     //public int $uniqueFor = 20;
@@ -35,10 +37,10 @@ class SendWelcomeEmail implements ShouldQueue,ShouldBeUnique
      */
     public function handle(): void
     {
-        logger('User logged in: ' . $this->user->email);
+       // logger("{$this->user->email} Logged In");
         Mail::raw('you are logged in!', function ($message) {
             $message->to($this->user->email)
-                ->subject('Welcome ' . $this->user->name . ' to web site');
+                ->subject("Welcome  {$this->user->name}  to web site");
         });
     }
 }
