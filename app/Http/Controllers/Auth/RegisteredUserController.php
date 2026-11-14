@@ -58,7 +58,12 @@ class RegisteredUserController extends Controller
             new SendWelcomeEmail($user),
             new NotifyAdmin($user)
         ])->catch(function (Throwable $e) use ($user) {
-            logger()->error("Chain failed for User {$user->id}: " . $e->getMessage());
+            logger()->error("Chain failed for User {$user->id}: ",
+                [
+                    'user_id' => $user->id,
+                    'error' => $e->getMessage(),
+
+                ]);
         })->dispatch();
         event(new Registered($user));
 

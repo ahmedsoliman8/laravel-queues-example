@@ -26,7 +26,7 @@ class CreateUserSetting implements ShouldQueue
      */
     public function handle(): void
     {
-        throw  new  \Exception('error about create user setting');
+      //  throw  new  \Exception('error about create user setting');
         Setting::create([
             'user_id' => $this->user->id,
             'language' => 'en',
