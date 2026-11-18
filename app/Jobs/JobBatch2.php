@@ -24,7 +24,7 @@ class JobBatch2 implements ShouldQueue
      */
     public function handle(): void
     {
-        throw new \Exception('Job batch 2 not working');
+       // throw new \Exception('Job batch 2 not working');
         Log::info('Job Batch 2');
     }
 }
