@@ -5,6 +5,9 @@ use App\Jobs\ImportProductsChunk;
 use App\Jobs\JobBatch1;
 use App\Jobs\JobBatch2;
 use App\Jobs\JobBatch3;
+use App\Jobs\SendWelcomeEmail;
+use App\Jobs\TryAPICall;
+use App\Models\User;
 use Illuminate\Bus\Batch;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Route;
@@ -16,7 +19,7 @@ Route::get('/', function () {
          new ImportProductsChunk(201, 300),
          new ImportProductsChunk(301, 400),
          new ImportProductsChunk(401, 500),
-     ])->dispatch();*/
+     ])->dispatch();
 
 
     Bus::batch([
@@ -58,6 +61,13 @@ Route::get('/', function () {
 
         ->allowFailures()
         ->dispatch();
+
+    */
+
+
+    //SendWelcomeEmail::dispatch(User::find(1));
+
+    TryAPICall::dispatch();
 
     return view('welcome');
 });
