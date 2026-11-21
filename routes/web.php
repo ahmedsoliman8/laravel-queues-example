@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
+
+
+   // SendWelcomeEmail::dispatch(User::find(7));
+
+   foreach (User::all() as $user) {
+        SendWelcomeEmail::dispatch($user);
+    }
+
     /* Bus::batch([
          new ImportProductsChunk(1, 100),
          new ImportProductsChunk(101, 200),
@@ -65,9 +73,9 @@ Route::get('/', function () {
     */
 
 
-    //SendWelcomeEmail::dispatch(User::find(1));
+  //  SendWelcomeEmail::dispatch(User::find(7));
 
-    TryAPICall::dispatch();
+    // TryAPICall::dispatch();
 
     return view('welcome');
 });
